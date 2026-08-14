@@ -1,0 +1,20 @@
+# data & models
+data/*
+!data/.gitkeep
+models/*
+!models/.gitkeep
+reports/figures/*
+!reports/figures/.gitkeep
+
+# python
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ipynb_checkpoints/
+
+# env
+.env
+
+# os
+.DS_Store
