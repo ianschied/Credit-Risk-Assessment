@@ -1,0 +1,27 @@
+# Deploy the FastAPI service on Render (render.com), free tier.
+#
+# Setup:
+#   1. Push this repo to GitHub
+#   2. In Render: New -> Blueprint -> connect the repo -> it reads this file
+#   3. Render will build + deploy automatically; note the assigned URL
+#      (something like https://credit-risk-api.onrender.com) and point
+#      streamlit_app.py's optional call_api() at it if you're demoing
+#      the client/server split instead of loading the model directly.
+#
+# Note: models/lightgbm.joblib and models/feature_cols.joblib must be
+# committed to the repo (or fetched at build time) for this to work,
+# since models/ is gitignored by default in this project. Either
+# remove models/ from .gitignore, or add a buildCommand step that
+# downloads the trained artifacts from cloud storage.
+
+services:
+  - type: web
+    name: credit-risk-api
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn src.api:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+    healthCheckPath: /health
