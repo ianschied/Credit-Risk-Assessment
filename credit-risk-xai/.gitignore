@@ -1,8 +1,7 @@
 # data & models
 data/*
 !data/.gitkeep
-models/*
-!models/.gitkeep
+models/* !models/.gitkeep !models/*.joblib
 reports/figures/*
 !reports/figures/.gitkeep
 
